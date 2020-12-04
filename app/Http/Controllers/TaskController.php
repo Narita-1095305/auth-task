@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Task;
+use App\Http\Requests\CreateTask;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class TaskController extends Controller
+{
+
+    public function index(){
+        $user = Auth::user();
+        $tasks = $user->tasks()->get();
+        
+        return view('tasks.index',compact('tasks'))->with('message', '');
+    }
+    
+    public function showAddForm(){
+        return view('tasks.add');
+    }
+
+    public function add(CreateTask $request){
+        $user_id = Auth::id();
+        $savedata = [
+            'title' => $request->title,
+            'status' => $request->status,
+            'due_date' => $request->due_date = date('Y-m-d H:i:s',strtotime($request->due_date)),
+            'comment' => $request->comment,
+            'user_id' => $user_id,
+        ];
+        $task = new Task;
+        $task->fill($savedata)->save();
+        return redirect('/tasks')->with('message','タスクを追加しました');
+    }
+
+    public function edit(int $task_id, CreateTask $request){
+        $task = Task::find($task_id);
+
+        $savedata = [
+            'title' => $request->title,
+            'status' => $request->status,
+            'due_date' => $request->due_date = date('Y-m-d H:i:s',strtotime($request->due_date)),
+            'comment' => $request->comment,
+        ];
+        $this->authorize('edit',$task);
+        $task->fill($savedata)->save();
+
+        return redirect('/tasks')->with('message','タスクを編集しました');
+    }
+
+    public function showEditForm(int $task_id){
+        $task = Task::find($task_id);
+        if(is_null($task)){
+            abort(404);
+        }
+        $this->authorize('view',$task);
+        return view('tasks.edit',['task'=>$task]);
+    }
+
+    public function destroyTask(int $task_id){
+        $deleteTask = Task::find($task_id);
+        $deleteTask -> delete();
+
+        return redirect('/tasks')->with('message','タスクを削除しました');
+    }
+}
