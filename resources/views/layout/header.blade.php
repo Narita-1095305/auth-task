@@ -1,7 +1,7 @@
 @section('header')
 <header class="sticky-top">
 <nav class="navbar navbar-dark bg-dark">
-    <a href="/" class="navbar-brand">Navbar</a>
+    <a href="/" class="navbar-brand">課題管理システム</a>
     <div>
         @if(Auth::check())
           <span class="text-white">ようこそ, {{ Auth::user()->name }}さん</span>
