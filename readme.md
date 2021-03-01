@@ -3,9 +3,10 @@
 ## アプリ名
 課題管理アプリケーション
 ## 対象OS
-+ Windows,Linux,Mac どれでも大丈夫です
++ Windows,Linux,Mac
 ## 開発環境/言語
-+ Linux(Ubuntu)/PHP(フレームワーク:Laravel)
++ vagrant
++ Linux(Ubuntu 18.04.5)/PHP 7.4.11(フレームワーク:Laravel)
 ## 機能概要(機能一覧)
 + タスクの追加機能
 + タスクの参照機能
