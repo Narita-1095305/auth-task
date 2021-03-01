@@ -7,8 +7,8 @@
     <div class="text-center w-75 mx-auto">
         <table class="table table-borderless text-center">
             @if(session('message'))
-                <div class="alert alert-danger m-1">
-                    <p>{{ session('message') }}</p>
+                <div class="alert alert-success m-1">
+                    <div>{{ session('message') }}</div>
                 </div>
             @endif
             <tr>
