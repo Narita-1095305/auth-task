@@ -21,16 +21,18 @@
                     <h1 class="text-center">課題追加フォーム</h1>
                     <div class="w-75 mx-auto">
                         <div class="form-group">
-                        <label for="title">課題</label>
-                        <input type="text" class="form-control" name="title" placeholder="○○のレポート" value={{ old('title') }}>
+                            <label for="title">課題</label>
+                            <input type="text" class="form-control" name="title" placeholder="○○のレポート" value={{ old('title') }}>
                         </div>
-                        <div class="form-group text-center mx-auto">
+                        <div class="form-group mx-auto">
                             <label for="status">着手状況</label>
-                            <select name="status"　id="status">
-                                <option value="1" @if(old('status')=='1') selected @endif>未着手</option>
-                                <option value="2" @if(old('status')=='2') selected @endif>着手中</option>
-                                <option value="3" @if(old('status')=='3') selected @endif>完了</option>
-                            </select>
+                            <div>
+                                <select name="status"　id="status">
+                                    <option value="1" @if(old('status')=='1') selected @endif>未着手</option>
+                                    <option value="2" @if(old('status')=='2') selected @endif>着手中</option>
+                                    <option value="3" @if(old('status')=='3') selected @endif>完了</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="due_date">締切日時</label>
