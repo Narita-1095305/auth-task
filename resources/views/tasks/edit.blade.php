@@ -18,7 +18,7 @@
         @csrf
         <h1 class="text-center">課題編集フォーム</h1>
         <div class="w-75 mx-auto">
-          <div class="form-group">
+          <div class="form-group" style="none;">
             <label for="task">課題</label>
             <input type="text" class="form-control" name="title"value={{ old('title') ?? $task->title }}>
           </div>

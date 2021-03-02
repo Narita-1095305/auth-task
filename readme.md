@@ -6,14 +6,63 @@
 + Windows,Linux,Mac
 ## 開発環境/言語
 + vagrant
-+ Linux(Ubuntu 18.04.5)/PHP 7.4.11(フレームワーク:Laravel)
++ Linux(Ubuntu 18.04)/PHP 7.4(フレームワーク:Laravel)
++ postgresql 12.6
 ## 機能概要(機能一覧)
 + タスクの追加機能
 + タスクの参照機能
 ## フレームワークのバージョン
-+ Laravel Framework 6.20.7
++ Laravel Framework 6.20
 ## テーブル定義(ER図)など
 ![](E-R.png)
+## 構築方法
+### ubuntuでのインストール方法
+1. PHP7.4のインストールを行う。
+    ```
+    $ sudo apt update
+    $ sudo apt -y install php7.4
+    ```
+2. Composerを使用するために必要なライブラリをインストールする。
+
+    ```
+    $ sudo apt install curl php7.4-cli php7.4-mbstring git unzip
+    ```
+3. Composerを以下のサイトを参考にインストールする。
+    * https://getcomposer.org/download/ ここを参考にcomposerのインストールを行う。
+4. Composerコマンドを使えるようにする。
+    ```
+    $ sudo mv composer.phar /usr/local/bin/composer #(composer.pharの移動と名前変更)
+    $ sudo chmod +x /usr/local/bin/composer #(実行権限を付ける)
+    $ composer --version #(バージョン確認)
+    ```
+5. gitからcloneを行いローカル環境に落としてくる。
+    ```
+    $ git clone https://github.com/Narita-1095305/auth-task.git
+    ```
+6. アプリをブラウザ表示できるようにする。
+    ```
+    $ composer install
+    $ cp .env.example .env
+    ```
+    * 先ほど作られた.envファイルは環境設定どおりに設定する。　
+    以下はpostgresqlを用いた場合の設定である。
+    ```
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_DATABASE={データベース名}
+    DB_USERNAME={データベースを管理しているユーザ名}
+    DB_PASSWORD={データベースのパスワード}
+    ```
+    * migrate実行
+    ```
+    $ php artisan migrate
+    ```
+    * サーバーを立ち上げる
+    ```
+    $ php artisan serve --host 0.0.0.0
+    ```
+
 ## コンセプト
 + 課題が多い大学向けの人のための、提出日の締切を忘れないためのリスト。
 ## こだわったポイント
