@@ -11,20 +11,20 @@
                 <!--入れ子構造にしてフォームの幅を狭める-->
                 <h1 class="text-center">課題詳細フォーム</h1>
                 <div class="w-75 mx-auto">
-                    <div class="form-group">
-                        <label for="title">課題名</label>
+                    <div>
+                        <p><strong>課題名</strong></p>
                         <p>{{$task->title}}</p>
                     </div>
-                    <div class="form-group mx-auto">
-                        <label for="status">着手状況</label>
-                        <p>{{$task->status}}</p>
+                    <div>
+                        <p><strong>着手状況</strong></p>
+                        <p class="{{$task->status_class}}">{{$task->status_label}}</p>
                     </div>
-                    <div class="form-group mx-auto">
-                        <label for="due_date">締切日時</label>
+                    <div>
+                        <p><strong>締切日時</strong></p>
                         <p>{{$task->date_to_datetime }}</p>
                     </div>
-                    <div class="form-group mx-auto">
-                        <label for="comment">コメント</label>
+                    <div>
+                        <p><strong>コメント</strong></p>
                         <p>{{$task->comment }}</p>
                     </div>
                     <div class="text-center">

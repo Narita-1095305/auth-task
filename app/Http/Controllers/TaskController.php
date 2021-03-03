@@ -33,7 +33,7 @@ class TaskController extends Controller
 
     public function sortByDuedate(){
         $user = Auth::user();
-        $tasks = $user->tasks()->orderBy('due_date','asc')->get();
+        $tasks = $user->tasks()->where('status','!=','3')->orderBy('due_date','asc')->get();
 
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
