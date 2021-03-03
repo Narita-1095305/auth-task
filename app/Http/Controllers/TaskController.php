@@ -12,7 +12,7 @@ class TaskController extends Controller
 
     public function index(){
         $user = Auth::user();
-        $tasks = $user->tasks()->where('status','1')->orWhere('status','2')->get();
+        $tasks = $user->tasks()->get();
         
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
