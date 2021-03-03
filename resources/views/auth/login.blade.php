@@ -27,7 +27,7 @@
                             <input type="password" class="form-control" name="password" required>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success w-25" value="submit">ログイン</button>
+                            <button class="btn btn-success" value="submit">ログイン</button>
                         </div>
                     </div>
                 </form>

@@ -35,7 +35,7 @@
                             <input type="password" class="form-control" name="password_confirmation">
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success" value="submit">送信</div>
+                            <button class="btn btn-success" value="submit">登録</div>
                         </div>
                     </div>
                 </form>

@@ -20,7 +20,7 @@
         <div class="w-75 mx-auto">
           <div class="form-group" style="none;">
             <label for="task">課題</label>
-            <input type="text" class="form-control" name="title"value={{ old('title') ?? $task->title }}>
+            <input type="text" class="form-control" name="title" value="{{ old('title') ?? $task->title }}">
           </div>
           <div class="form-group mx-auto">
             <label for="status">着手状況</label>
@@ -43,10 +43,11 @@
           </div>
           <div class="form-group mx-auto">
             <label for="comment">コメント</label>
-            <input type="text" class="form-control" name="comment" placeholder="現在○○まで終了" value={{ old('comment') ?? $task->comment }}>
+            <textarea class="form-control" name="comment">{{ old('comment') ?? $task->comment }}</textarea>
           </div>
           <div class="text-center">
-            <button class="btn btn-success w-25" value="submit">編集を行う</button>
+            <button class="btn btn-success" value="submit">編集を行う</button>
+            <a class="btn btn-secondary" href="{{ route('tasks.index')}}">キャンセル</a>
           </div>
         </div>
       </form>

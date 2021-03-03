@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DateTime;
 
 class Task extends Model
 {
@@ -43,11 +44,17 @@ class Task extends Model
     }
 
     public function getFormattedDueDateAttribute(){
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['due_date'])->format('Y/m/d H:i');
+        $today = new DateTime();
+        $due_date = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['due_date']);
+        $remain = $due_date->diff($today);
+        return $remain->format('%a');
     }
     //データベースの日付の型をdatetime-local型に直す。
     public function getDateToDatetimeLocalAttribute(){
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['due_date'])->format('Y-m-d\TH:i');
     }
     
+    public function getDateToDatetimeAttribute(){
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['due_date']);
+    }
 }

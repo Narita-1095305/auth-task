@@ -5,7 +5,7 @@
 @include('layout.header')
 @section('content')
     <div class="w-75 mx-auto mt-3">
-        <div class="w-75 mx-auto">
+        <div class="w-75 mx-auto align-middle">
             @if($errors->any())
                 <div class="alert alert-danger text-center">
                     @foreach($errors->all() as $message)
@@ -22,7 +22,7 @@
                     <div class="w-75 mx-auto">
                         <div class="form-group">
                             <label for="title">課題</label>
-                            <input type="text" class="form-control" name="title" placeholder="○○のレポート" value={{ old('title') }}>
+                            <input type="text" class="form-control" name="title" placeholder="○○のレポート" value="{{ old('title') }}" required>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="status">着手状況</label>
@@ -36,14 +36,15 @@
                         </div>
                         <div class="form-group mx-auto">
                             <label for="due_date">締切日時</label>
-                            <input type="datetime-local" class="form-control" name="due_date" value={{ old('due_date') }}>
+                            <input type="datetime-local" class="form-control" name="due_date" value="{{ old('due_date') }}" required>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="comment">コメント</label>
-                            <input type="text" class="form-control" name="comment" placeholder="現在○○まで終了" value={{ old('comment') }}>
+                            <textarea class="form-control" name="comment">{{ old('comment')}}</textarea>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success w-25" value="submit">課題を新規作成</button>
+                            <button class="btn btn-success" value="submit">課題を新規作成</button>
+                            <a class="btn btn-secondary" href="{{ route('tasks.index')}}">キャンセル</a>
                         </div>
                     </div>
                 </form>

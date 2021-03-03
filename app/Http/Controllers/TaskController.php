@@ -12,10 +12,32 @@ class TaskController extends Controller
 
     public function index(){
         $user = Auth::user();
+        $tasks = $user->tasks()->where('status','1')->orWhere('status','2')->get();
+        
+        return view('tasks.index',compact('tasks'))->with('message', '');
+    }
+
+    public function all(){
+        $user = Auth::user();
         $tasks = $user->tasks()->get();
         
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
+
+    public function done(){
+        $user = Auth::user();
+        $tasks = $user->tasks()->where('status','3')->get();
+        
+        return view('tasks.index',compact('tasks'))->with('message', '');
+    }
+
+    public function sortByDuedate(){
+        $user = Auth::user();
+        $tasks = $user->tasks()->orderBy('due_date','asc')->get();
+
+        return view('tasks.index',compact('tasks'))->with('message', '');
+    }
+
     
     public function showAddForm(){
         return view('tasks.add');
@@ -57,6 +79,24 @@ class TaskController extends Controller
         }
         $this->authorize('view',$task);
         return view('tasks.edit',['task'=>$task]);
+    }
+
+    public function detail(int $task_id){
+        $task = Task::find($task_id);
+        if(is_null($task)){
+            abort(404);
+        }
+        $this->authorize('view',$task);
+        return view('tasks.detail',['task'=>$task]);
+    }
+
+    public function showDeleteForm(int $task_id){
+        $task = Task::find($task_id);
+        if(is_null($task)){
+            abort(404);
+        }
+        $this->authorize('view',$task);
+        return view('tasks.delete',['task'=>$task]);
     }
 
     public function destroyTask(int $task_id){
