@@ -31,6 +31,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/tasks/add', 'TaskController@showAddForm')->name('tasks.add');
 
     Route::post('/tasks/add', 'TaskController@add');
+
+    Route::get('/tasks/{task_id}/complete', 'TaskController@showCompleteForm')->name('tasks.complete');
+
+    Route::post('/tasks/{task_id}/complete', 'TaskController@complete');
     
     Route::get('/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
     

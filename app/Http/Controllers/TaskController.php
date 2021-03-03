@@ -81,6 +81,27 @@ class TaskController extends Controller
         return view('tasks.edit',['task'=>$task]);
     }
 
+    public function showCompleteForm(int $task_id){
+        $task = Task::find($task_id);
+        if(is_null($task)){
+            abort(404);
+        }
+        $this->authorize('complete',$task);
+        return view('tasks.complete',['task'=>$task]);
+    }
+
+    public function complete(int $task_id){
+        $task = Task::find($task_id);
+
+        $savedata = [
+            'status' => 3,
+        ];
+        $this->authorize('complete',$task);
+        $task->fill($savedata)->save();
+
+        return redirect('/tasks')->with('message','タスクが完了しました');
+    }
+
     public function detail(int $task_id){
         $task = Task::find($task_id);
         if(is_null($task)){
@@ -95,12 +116,13 @@ class TaskController extends Controller
         if(is_null($task)){
             abort(404);
         }
-        $this->authorize('view',$task);
+        $this->authorize('delete',$task);
         return view('tasks.delete',['task'=>$task]);
     }
 
     public function destroyTask(int $task_id){
         $deleteTask = Task::find($task_id);
+        $this->authorize('delete',$deleteTask);
         $deleteTask -> delete();
 
         return redirect('/tasks')->with('message','タスクを削除しました');
