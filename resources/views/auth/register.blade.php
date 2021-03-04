@@ -20,19 +20,19 @@
                     <div class="w-75 mx-auto">
                         <div class="form-group mx-auto">
                         <label for="email">メールアドレス</label>
-                        <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                        <input type="text" class="form-control" name="email" placeholder="example@hoge.com" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="name">ユーザー名</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="password">パスワード</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" placeholder="英半角文字と数字のみ" name="password" required>
                         </div>
                         <div class="form-group mx-auto">
                             <label for="password">パスワード確認</label>
-                            <input type="password" class="form-control" name="password_confirmation">
+                            <input type="password" class="form-control" name="password_confirmation" required>
                         </div>
                         <div class="text-center">
                             <button class="btn btn-success" value="submit">登録</div>

@@ -1,5 +1,5 @@
 @section('footer')
 <div class="footer bg-dark">
-    <p>Footer</p>
+    <p>&copy; Rikiya Narita</p>
 </div>
 @endsection

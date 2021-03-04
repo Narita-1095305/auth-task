@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div id="app" v-cloak>
+<div id="app" class="footerFixed" v-cloak>
     @yield('header')
 
-    <main class="mb-5">
+    <main>
         @yield('content')
     </main>
     @yield('footer')

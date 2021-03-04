@@ -53,6 +53,9 @@
             </tr>
             @endforeach
           </table>
+          <div class="pagination justify-content-center"> 
+            {{$tasks->links()}}
+          </div>
     </div>
 @endsection
 

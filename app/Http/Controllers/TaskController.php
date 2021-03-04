@@ -12,28 +12,28 @@ class TaskController extends Controller
 
     public function index(){
         $user = Auth::user();
-        $tasks = $user->tasks()->where('status','!=','3')->get();
+        $tasks = $user->tasks()->where('status','!=','3')->paginate(5);
         
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
 
     public function all(){
         $user = Auth::user();
-        $tasks = $user->tasks()->get();
+        $tasks = $user->tasks()->paginate(5);
         
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
 
     public function done(){
         $user = Auth::user();
-        $tasks = $user->tasks()->where('status','3')->get();
+        $tasks = $user->tasks()->where('status','3')->paginate(5);
         
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
 
     public function sortByDuedate(){
         $user = Auth::user();
-        $tasks = $user->tasks()->where('status','!=','3')->orderBy('due_date','asc')->get();
+        $tasks = $user->tasks()->where('status','!=','3')->orderBy('due_date','asc')->paginate(5);
 
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
