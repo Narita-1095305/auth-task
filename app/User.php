@@ -30,10 +30,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * ユーザとそのユーザの持っているタスクの結びつけ
+     *
+     * @return object
+     */
+
     public function tasks()
     {
         return $this->hasMany('App\Task');
     }
+
+    /*
+    * パスワードをリセットするためのメソッド
+    *
+    */
 
     public function sendPasswordResetNotification($token)
     {

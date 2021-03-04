@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/task/{task_id}/detail', 'TaskController@detail')->name('tasks.detail');
 
+    Route::get('/search', 'TaskController@search')->name('tasks.search');
+
 
     Route::get('/tasks/add', 'TaskController@showAddForm')->name('tasks.add');
 

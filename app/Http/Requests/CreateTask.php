@@ -30,6 +30,11 @@ class CreateTask extends FormRequest
             'comment' => '',
         ];
     }
+    /**
+     * attributesの日本語訳追加
+     *
+     * @return array
+     */
     public function attributes()
     {
         return [
@@ -38,6 +43,11 @@ class CreateTask extends FormRequest
         ];
     }
 
+    /**
+     * messagesの日本語訳追加
+     *
+     * @return array
+     */
     public function messages()
     {
         return [

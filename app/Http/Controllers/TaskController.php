@@ -17,6 +17,17 @@ class TaskController extends Controller
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
 
+    public function search(Request $request){
+        $user = Auth::user();
+		$keyword = $request->input('keyword');
+		if(!empty($keyword)){
+            $tasks = $user->tasks()->where('title','like','%'.$keyword.'%')->where('status','!=','3')->orderBy('id', 'asc')->paginate(5);
+		}else{
+			return redirect('/tasks');
+		}
+		return view('tasks.index',compact('tasks'),compact('keyword'));
+	}
+
     public function all(){
         $user = Auth::user();
         $tasks = $user->tasks()->paginate(5);

@@ -14,10 +14,12 @@
 
         <div class="form-inline text-center justify-content-center">
             <label for="task">フィルター：</label>
-            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
-            <div class="m-1">
-            <button class="btn btn-dark">検索</button>
-            </div>
+            <form class="form-inline" action="{{route ('tasks.search')}}">
+                <input type="text" class="form-control" name="keyword" value="{{ old('keyword') }}">
+                <div class="m-1">
+                <button class="btn btn-dark">検索</button>
+                </div>
+            </form>
         </div>
         <div class="m-1">
             <a class="btn btn-primary" href="{{ route('tasks.add') }}">タスクを追加する</a>
@@ -54,7 +56,11 @@
             @endforeach
           </table>
           <div class="pagination justify-content-center"> 
-            {{$tasks->links()}}
+            @if(\route::is('tasks.search'))
+              {{ $tasks->appends(request()->input())->links() }}
+            @else
+              {{$tasks->links()}}
+            @endif 
           </div>
     </div>
 @endsection
