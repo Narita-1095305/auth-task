@@ -26,9 +26,10 @@
         </div>
 
         <div class="m-1">
-            <a class="btn btn-success" href="{{ route('tasks.all') }}">すべてのタスク</a>
-            <a class="btn btn-secondary" href="{{ route('tasks.done') }}">完了したタスク</a>
-            <a class="btn btn-info" href="{{ route('tasks.duedate') }}">締切順</a>
+            <a class="btn btn-success m-1" href="{{ route('tasks.all') }}">すべてのタスク</a>
+            <a class="btn btn-secondary m-1" href="{{ route('tasks.done') }}">完了したタスク</a>
+            <a class="btn btn-info m-1" href="{{ route('tasks.duedate') }}">締切順</a>
+            <a class="btn btn-warning m-1" href="{{ route('tasks.progress') }}">進捗順</a>
         </div>        
         <table class="table text-center table-responsive-sm">
             
@@ -36,6 +37,7 @@
                 <th class="align-middle">Task</th>
                 <th class="align-middle">Status</th>
                 <th class="align-middle">Deadline</th>
+                <th class="align-middle">Progress</th>
                 <th class="align-middle">Status Change</th>
             </tr>
             @foreach($tasks as $task)
@@ -47,6 +49,27 @@
                 </td>
                 <td class="align-middle {{$task->status_class}}">{{$task->status_label}}</td>
                 <td class="align-middle">残り{{$task->formatted_due_date}}日</td>
+                <td class="align-middle">
+                    <div class="progress">
+                        <div class="progress-bar"
+                            style="width:{{$task->progress}}%"
+                            role="progressbar"
+                            aria-valuenow="{{$task->progress}}"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                            {{$task->progress}}%
+                        </div>
+                        <div class="progress-bar bg-danger"
+                            style="width:{{100 - $task->progress}}%"
+                            role="progressbar"
+                            aria-valuenow="{{100 - $task->progress}}"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                            {{100 - $task->progress}}%
+                        </div>
+                    </div>
+                    <small>青:完了 赤:未</small>
+                </td>
                 <td class="align-middle">
                     <div>
                         <a class="btn btn-success" href="{{ route('tasks.complete', ['task_id' => $task->id]) }}">完了</a>

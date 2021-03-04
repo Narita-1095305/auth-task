@@ -35,6 +35,11 @@
                             </div>
                         </div>
                         <div class="form-group mx-auto">
+                            <label for="progress">進捗度:</label>
+                            <input type="range" name="progress" class="form-control-range" value="{{ old('progress') ?? 0}}" required>
+                            <aside>進捗度は着手中の場合のみ任意の値が保存されます。(未着手:0,完了:100)</aside>
+                        </div>
+                        <div class="form-group mx-auto">
                             <label for="due_date">締切日時</label>
                             <input type="datetime-local" class="form-control" name="due_date" value="{{ old('due_date') }}" required>
                         </div>

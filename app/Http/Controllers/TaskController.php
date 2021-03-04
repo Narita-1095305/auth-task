@@ -49,6 +49,13 @@ class TaskController extends Controller
         return view('tasks.index',compact('tasks'))->with('message', '');
     }
 
+    public function sortByProgress(){
+        $user = Auth::user();
+        $tasks = $user->tasks()->where('status','!=','3')->orderBy('progress','asc')->paginate(5);
+
+        return view('tasks.index',compact('tasks'))->with('message', '');
+    }
+
     
     public function showAddForm(){
         return view('tasks.add');
@@ -56,10 +63,16 @@ class TaskController extends Controller
 
     public function add(CreateTask $request){
         $user_id = Auth::id();
+        if($request->status == 1){
+            $request->progress = 0;
+        }else if($request->status == 3){
+            $request->progress = 100;
+        }
         $savedata = [
             'title' => $request->title,
             'status' => $request->status,
             'due_date' => $request->due_date = date('Y-m-d H:i:s',strtotime($request->due_date)),
+            'progress' => $request->progress,
             'comment' => $request->comment,
             'user_id' => $user_id,
         ];
@@ -70,11 +83,17 @@ class TaskController extends Controller
 
     public function edit(int $task_id, CreateTask $request){
         $task = Task::find($task_id);
+        if($request->status == 1){
+            $request->progress = 0;
+        }else if($request->status == 3){
+            $request->progress = 100;
+        }
 
         $savedata = [
             'title' => $request->title,
             'status' => $request->status,
             'due_date' => $request->due_date = date('Y-m-d H:i:s',strtotime($request->due_date)),
+            'progress' => $request->progress,
             'comment' => $request->comment,
         ];
         $this->authorize('edit',$task);
@@ -106,6 +125,7 @@ class TaskController extends Controller
 
         $savedata = [
             'status' => 3,
+            'progress' => 100,
         ];
         $this->authorize('complete',$task);
         $task->fill($savedata)->save();

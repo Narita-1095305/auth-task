@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/tasks/duedate', 'TaskController@sortByDuedate')->name('tasks.duedate');
 
+    Route::get('/tasks/progress', 'TaskController@sortByProgress')->name('tasks.progress');
+
     Route::get('/task/{task_id}/detail', 'TaskController@detail')->name('tasks.detail');
 
     Route::get('/search', 'TaskController@search')->name('tasks.search');

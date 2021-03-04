@@ -13,25 +13,47 @@
                     <!--入れ子構造にしてフォームの幅を狭める-->
                     <h1 class="text-center">課題を完了としてもいいですか？</h1>
                     <div class="w-75 mx-auto">
-                        <div class="form-group">
-                            <label for="title">課題名</label>
-                            <p>{{ $task->title}}</p>
+                        <div>
+                            <div><strong>課題名</strong></div>
+                            <div>{{$task->title}}</div>
                         </div>
-                        <div class="form-group mx-auto">
-                            <label for="status">着手状況</label>
-                            <p>{{ $task->status}}</p>
+                        <div>
+                            <div><strong>着手状況</strong></div>
+                            <div class="{{$task->status_class}}">{{$task->status_label}}</div>
                         </div>
-                        <div class="form-group mx-auto">
-                            <label for="due_date">締切日時</label>
-                            <p>{{ $task->date_to_datetime }}</p>
+                        <div>
+                            <div><strong>進捗</strong></div>
+                            <div class="progress">
+                                <div class="progress-bar"
+                                    style="width:{{$task->progress}}%"
+                                    role="progressbar"
+                                    aria-valuenow="{{$task->progress}}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    {{$task->progress}}%
+                                </div>
+                                <div class="progress-bar bg-danger"
+                                    style="width:{{100 - $task->progress}}%"
+                                    role="progressbar"
+                                    aria-valuenow="{{100 - $task->progress}}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    {{100 - $task->progress}}%
+                                </div>
+                            </div>
+                            <small>青:完了 赤:未</small>
                         </div>
-                        <div class="form-group mx-auto">
-                            <label for="comment">コメント</label>
-                            <p>{{ $task->comment }}</p>
+                        <div>
+                            <div><strong>締切日時</strong></div>
+                            <div>{{$task->date_to_datetime }}</div>
+                        </div>
+                        <div>
+                            <div><strong>コメント</strong></div>
+                            <div>{{$task->comment }}</div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success" value="submit">完了にする</button>
-                            <a class="btn btn-secondary" href="{{ route('tasks.index')}}">キャンセル</a>
+                            <button class="btn btn-success m-1" value="submit">完了にする</button>
+                            <a class="btn btn-secondary m-1" href="{{ route('tasks.index')}}">キャンセル</a>
                         </div>
                     </div>
                 </form>

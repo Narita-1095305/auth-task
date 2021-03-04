@@ -38,6 +38,11 @@
             </div>
           </div>
           <div class="form-group mx-auto">
+            <label for="progress">進捗度:</label>
+            <input type="range" name="progress" class="form-control-range" value="{{ old('progress') ?? $task->progress}}" required>
+            <aside>進捗度は着手中の場合のみ任意の値が保存されます。(未着手:0,完了:100)</aside>
+          </div>
+          <div class="form-group mx-auto">
             <label for="deadline">締切日時</label>
             <input type="datetime-local" class="form-control" name="due_date" value="{{ old('due_date') ?? $task->date_to_datetime_local }}">
           </div>
@@ -46,8 +51,8 @@
             <textarea class="form-control" name="comment">{{ old('comment') ?? $task->comment }}</textarea>
           </div>
           <div class="text-center">
-            <button class="btn btn-success" value="submit">編集を行う</button>
-            <a class="btn btn-secondary" href="{{ route('tasks.index')}}">キャンセル</a>
+            <button class="btn btn-success m-1" value="submit">編集を行う</button>
+            <a class="btn btn-secondary m-1" href="{{ route('tasks.index')}}">キャンセル</a>
           </div>
         </div>
       </form>
