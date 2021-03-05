@@ -72,7 +72,9 @@
                 </td>
                 <td class="align-middle">
                     <div>
+                        @if($task->status != 3)
                         <a class="btn btn-success" href="{{ route('tasks.complete', ['task_id' => $task->id]) }}">完了</a>
+                        @endif
                     </div>
                 </td>
             </tr>
